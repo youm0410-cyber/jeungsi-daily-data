@@ -1,0 +1,41 @@
+name: daily-data
+
+on:
+  schedule:
+    # 한국시간(KST=UTC+9) 기준 평일 08:00, 16:10에 실행
+    - cron: "0 23 * * 0-4"   # 08:00 KST (월~금)
+    - cron: "10 7 * * 1-5"   # 16:10 KST (월~금)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect market data (KOSPI/KOSDAQ)
+        run: python build_market_data.py
+      - name: Collect themes
+        run: python build_themes.py
+      - name: Collect news
+        run: python build_news.py
+      - name: Make JSON
+        run: python make_json.py
+      - name: Commit & push updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add market_data.json news_data.json
+          if git diff --cached --quiet; then
+            echo "no changes to commit"
+          else
+            git commit -m "daily data update ($(date +'%Y-%m-%d %H:%M %Z'))"
+            git push
+          fi
