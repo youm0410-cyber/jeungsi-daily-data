@@ -12,6 +12,31 @@ RANK_RE = re.compile(r'class="no"[^>]*>\s*(\d+)\s*</td>')
 PRICE_RE = re.compile(r'<td class="number">\s*([\d,]+)\s*</td>')
 RATE_RE = re.compile(r'<span class="tah p11 ([^"]*)"[^>]*>\s*([+\-]?[\d,]+\.\d+)%')
 
+IDX_CODES = [("코스피", "KOSPI"), ("코스닥", "KOSDAQ"), ("코스피200", "KPI200")]
+
+
+def collect_indices():
+    """네이버 모바일 지수 API(JSON)에서 코스피/코스닥/코스피200 시세를 받아온다."""
+    out = []
+    for nm, code in IDX_CODES:
+        try:
+            url = f"https://m.stock.naver.com/api/index/{code}/basic"
+            req = urllib.request.Request(url, headers=HEADERS)
+            with urllib.request.urlopen(req, timeout=20) as r:
+                d = json.loads(r.read().decode("utf-8", "replace"))
+            val = d.get("closePrice", "-")
+            direction = (d.get("compareToPreviousPrice") or {}).get("name", "")
+            sign = "+" if direction == "RISING" else ("-" if direction == "FALLING" else "")
+            amount = str(d.get("compareToPreviousClosePrice", "0")).lstrip("+-")
+            rate = str(d.get("fluctuationsRatio", "0")).lstrip("+-")
+            chg_str = f"{sign}{amount} ({sign}{rate}%)"
+            out.append({"name": nm, "val": val, "chg": chg_str})
+            print(f"  지수 {nm}: {val} {chg_str}")
+        except Exception as e:
+            out.append({"name": nm, "val": "-", "chg": "0.00 (0.00%)"})
+            print(f"  ! {nm} 지수 실패: {e}")
+    return out
+
 
 def fetch(sosok, page):
     url = f"https://finance.naver.com/sise/sise_market_sum.naver?sosok={sosok}&page={page}"
@@ -65,12 +90,15 @@ def collect(sosok, last):
 
 
 def main():
+    print("지수 수집...")
+    indices = collect_indices()
     print("KOSPI 수집...")
     kospi = collect(0, 50)
     print("KOSDAQ 수집...")
     kosdaq = collect(1, 37)
     data = {
         "generatedAt": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "indices": indices,
         "kospi": kospi,
         "kosdaq": kosdaq,
     }
