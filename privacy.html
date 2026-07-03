@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>증시데일리 · 개인정보처리방침</title>
+<meta name="theme-color" content="#08080b" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    background: #08080b;
+    color: #e8eaed;
+    line-height: 1.75;
+    padding: 20px 16px 48px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  .meta { color: #9aa0a6; font-size: 13px; margin-bottom: 28px; }
+  h2 { font-size: 16px; margin: 28px 0 10px; color: #4d9fff; }
+  p, li { font-size: 14px; color: #c4c7c5; }
+  ul { padding-left: 20px; }
+  a { color: #4d9fff; }
+  .back { display: inline-block; margin-bottom: 20px; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="daily_market_report.html">← 앱으로 돌아가기</a>
+  <h1>증시데일리 개인정보처리방침</h1>
+  <p class="meta">시행일: 2026년 6월 30일 · 앱 패키지: com.jeungsi.daily</p>
+
+  <p>「증시데일리」(이하 “앱”)는 대한민국 증시 정보와 커뮤니티 기능을 제공합니다. 본 방침은 Google Play 스토어에 배포되는 Android 앱 및 관련 웹 서비스에 적용됩니다.</p>
+
+  <h2>1. 수집하는 정보</h2>
+  <ul>
+    <li><strong>Google 로그인 시:</strong> Firebase Authentication을 통해 Google 계정 식별자(UID), 표시 이름, 이메일 주소가 처리될 수 있습니다.</li>
+    <li><strong>커뮤니티 채팅:</strong> 사용자가 입력한 닉네임, 메시지 내용, 방 정보, 작성 시각이 Google Cloud Firestore에 저장됩니다.</li>
+    <li><strong>기기 내 저장:</strong> 보유 주식 목록, 화면 테마, 닉네임, 채팅에서 차단한 사용자 목록 등은 기기의 localStorage에만 저장되며, 서버로 전송되지 않습니다(채팅 닉네임·토큰 제외).</li>
+    <li><strong>네트워크:</strong> 시세·뉴스 JSON 데이터를 GitHub 등 공개 URL에서 불러옵니다. 별도의 위치·연락처·사진 접근 권한은 요청하지 않습니다.</li>
+  </ul>
+
+  <h2>2. 이용 목적</h2>
+  <ul>
+    <li>증시 시세, 뉴스, 테마 정보 표시</li>
+    <li>커뮤니티 채팅 및 실시간 메시지 동기화</li>
+    <li>Google 계정 기반 로그인 및 세션 유지</li>
+    <li>앱 품질·오류 대응(별도 분석 SDK는 사용하지 않음)</li>
+  </ul>
+
+  <h2>3. 제3자 제공 및 처리 위탁</h2>
+  <ul>
+    <li><strong>Google Firebase</strong> (Authentication, Cloud Firestore) — 로그인 및 채팅 데이터 저장</li>
+    <li><strong>Google GitHub / 공개 데이터 URL</strong> — 시세·뉴스 JSON 제공</li>
+    <li><strong>Google AdMob</strong> — 앱 하단 배너·앱 실행 시 간헐적 전면 광고 (프리미엄/유료 기능 없음)</li>
+  </ul>
+  <p>광고는 Google AdMob 정책에 따르며, 기기 광고 ID가 사용될 수 있습니다. 앱 내 유료 구독·프리미엄 기능은 제공하지 않습니다.</p>
+
+  <h2>4. 보유 기간</h2>
+  <ul>
+    <li>채팅 메시지: 서비스 운영 기간 동안 보관됩니다. 공개 채팅방 특성상 계정 삭제 후에도 메시지 본문이 남을 수 있습니다.</li>
+    <li>Google 계정 정보: 계정 삭제 시 Firebase Authentication에서 삭제됩니다.</li>
+    <li>기기 내 localStorage: 앱 삭제 또는 앱 내 계정 삭제·초기화 시 제거됩니다.</li>
+  </ul>
+
+  <h2>5. 이용자 권리 · 계정 삭제</h2>
+  <p>앱 <strong>토론</strong> 탭에서 Google 로그인 후 다른 사용자 메시지 옆 <strong>「차단」</strong>으로 해당 사용자의 글을 숨길 수 있습니다. 차단 목록은 기기에만 저장됩니다.</p>
+  <p>앱 <strong>토론</strong> 탭에서 Google 로그인 후 <strong>「계정 삭제」</strong>를 이용하면 Firebase 계정 연동 해제 및 앱 내 저장 데이터(닉네임·채팅 세션·차단 목록 등)를 삭제할 수 있습니다.</p>
+  <p>문의: Google Play 스토어에 등록된 개발자 연락 이메일로 요청해 주세요.</p>
+
+  <h2>6. 아동</h2>
+  <p>본 앱은 만 13세 미만 아동을 대상으로 하지 않으며, 해당 연령의 개인정보를 고의로 수집하지 않습니다.</p>
+
+  <h2>7. 보안</h2>
+  <p>전송 구간은 HTTPS를 사용합니다. Firestore 보안 규칙으로 인증된 사용자만 채팅 데이터에 접근할 수 있도록 제한합니다.</p>
+
+  <h2>8. 방침 변경</h2>
+  <p>법령 또는 서비스 변경 시 본 페이지를 갱신합니다. 중요한 변경은 앱 또는 스토어를 통해 안내할 수 있습니다.</p>
+
+  <p class="meta">문의: Play 스토어 개발자 연락처 · 앱 이름: 증시데일리</p>
+</div>
+</body>
+</html>
